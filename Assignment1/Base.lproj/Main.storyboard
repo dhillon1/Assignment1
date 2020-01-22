@@ -204,20 +204,20 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter bet value ($)" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="e1a-Fv-XDf">
-                                        <rect key="frame" x="82" y="341" width="211" height="34"/>
+                                        <rect key="frame" x="78" y="315" width="211" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$5000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45v-Kk-7jW">
-                                        <rect key="frame" x="194" y="180" width="150" height="46"/>
+                                        <rect key="frame" x="191" y="180" width="150" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Money Left:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAe-un-gTd">
-                                        <rect key="frame" x="40" y="243" width="169" height="46"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Money Left :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAe-un-gTd">
+                                        <rect key="frame" x="40" y="243" width="171" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <nil key="textColor"/>
@@ -230,6 +230,15 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1ax-pE-MWw">
+                                        <rect key="frame" x="112" y="365" width="144" height="51"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <state key="normal" title="SPIN"/>
+                                        <connections>
+                                            <action selector="play:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Amr-Lk-eI6"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
@@ -237,29 +246,38 @@
                                 <rect key="frame" x="20" y="531" width="374" height="413"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1ax-pE-MWw">
-                                        <rect key="frame" x="138" y="62" width="83" height="61"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                        <state key="normal" title="Play"/>
-                                        <connections>
-                                            <action selector="play:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Amr-Lk-eI6"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXM-cb-xNn">
-                                        <rect key="frame" x="0.0" y="145" width="366" height="46"/>
+                                        <rect key="frame" x="0.0" y="52" width="366" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mst-6G-EXi">
-                                        <rect key="frame" x="0.0" y="226" width="366" height="58"/>
+                                        <rect key="frame" x="0.0" y="133" width="366" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kek-8j-94g">
+                                        <rect key="frame" x="8" y="225" width="127" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Reset Game"/>
+                                        <connections>
+                                            <action selector="resetGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="enO-u0-WC6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2V-tZ-jD4">
+                                        <rect key="frame" x="236" y="226" width="107" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <state key="normal" title="Quit Game"/>
+                                        <connections>
+                                            <action selector="quitGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ozx-3B-tAi"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
@@ -268,7 +286,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="betValue" destination="e1a-Fv-XDf" id="l0C-gw-bbL"/>
+                        <outlet property="betValue" destination="e1a-Fv-XDf" id="N3h-lW-neq"/>
                         <outlet property="color1" destination="BhD-cb-BQe" id="dgo-8h-w3D"/>
                         <outlet property="color10" destination="fj6-PA-gSR" id="TiJ-Ye-ffF"/>
                         <outlet property="color11" destination="c12-4M-dAX" id="cac-Uc-Mhm"/>
@@ -309,6 +327,7 @@
                         <outlet property="color8" destination="t1D-jr-j0N" id="WiE-w4-EQ8"/>
                         <outlet property="color9" destination="0XG-ak-QNz" id="jEU-J4-LK3"/>
                         <outlet property="jackpot" destination="mst-6G-EXi" id="uv3-hW-OLK"/>
+                        <outlet property="jackpotAmount" destination="45v-Kk-7jW" id="Ksb-Sk-kmK"/>
                         <outlet property="moneyLeft" destination="b88-R3-29E" id="qVA-2I-1Yc"/>
                         <outlet property="view1" destination="URO-PE-Vqe" id="809-BT-4FT"/>
                         <outlet property="view2" destination="baI-nJ-91E" id="AGF-9c-Nhn"/>

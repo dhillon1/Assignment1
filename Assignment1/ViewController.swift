@@ -3,8 +3,8 @@
 //  Assignment1
 //  Team member : Harmandeep Kaur and Simranjeet Singh Dhillon
 //  Assignment : 1
-//  Version : 3
-//  Message : Implementation of function working as predicted
+//  Version : 4
+//  Message : Implementation of reset and quit button with minor fixes in previous version
 //  Created by Simran on 2020-01-15.
 //  Copyright © 2020 centennialcollege. All rights reserved.
 //
@@ -57,12 +57,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var color38: UIImageView!
     @IBOutlet weak var color39: UIImageView!
     @IBOutlet weak var betValue: UITextField!
+    
     @IBOutlet weak var moneyLeft: UILabel!
     @IBOutlet weak var wonOrLose: UILabel!
     @IBOutlet weak var jackpot: UILabel!
+    @IBOutlet weak var jackpotAmount: UILabel!
     var initialFrame1 = CGRect()
     var initialFrame2 = CGRect()
     var initialFrame3 = CGRect()
+    
+    @IBAction func resetGame(_ sender: Any) {
+    }
+    
+    @IBAction func quitGame(_ sender: Any) {
+    }
+    
     
     var grapes = 0;
     var bananas = 0;
@@ -72,9 +81,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var bells = 0;
     var sevens = 0;
     var blanks = 0;
-    
+    var jackpotamount = 5000
+    var moneyLeftInBag : Int = 1000
     var winnings : Int = -1
     var playerBet : Int = -1
+    
     
     var flag1 = -1
     var flag2 = -1
@@ -82,9 +93,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func play(_ sender: Any) {
         
+        
         playerBet = Int(betValue.text!)!
         Reels()
-        
         print(flag1 , flag2, flag3)
         assignImage1()
         assignImage2()
@@ -126,6 +137,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    func resetFruitTally() {
+        grapes = 0;
+        bananas = 0;
+        oranges = 0;
+        cherries = 0;
+        bars = 0;
+        bells = 0;
+        sevens = 0;
+        blanks = 0;
+    }
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,6 +166,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
        
     }
     
+    private func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        print(betValue.text!)
+            return true
+        
+    }
+    
    
     
     
@@ -154,6 +186,121 @@ class ViewController: UIViewController, UITextFieldDelegate {
             return -1;
         }
     }
+    
+    
+
+    
+    func determineWinnings()
+    {
+        if (blanks == 0)
+        {
+            if (grapes == 3) {
+                winnings = playerBet * 10;
+            }
+            else if(bananas == 3) {
+                winnings = playerBet * 20;
+            }
+            else if (oranges == 3) {
+                winnings = playerBet * 30;
+            }
+            else if (cherries == 3) {
+                winnings = playerBet * 40;
+            }
+            else if (bars == 3) {
+                winnings = playerBet * 50;
+            }
+            else if (bells == 3) {
+                winnings = playerBet * 75;
+            }
+            else if (sevens == 3) {
+                winnings = playerBet * 100;
+            }
+            else if (grapes == 2) {
+                winnings = playerBet * 2;
+            }
+            else if (bananas == 2) {
+                winnings = playerBet * 2;
+            }
+            else if (oranges == 2) {
+                winnings = playerBet * 3;
+            }
+            else if (cherries == 2) {
+                winnings = playerBet * 4;
+            }
+            else if (bars == 2) {
+                winnings = playerBet * 5;
+            }
+            else if (bells == 2) {
+                winnings = playerBet * 10;
+            }
+            else if (sevens == 2) {
+                winnings = playerBet * 20;
+            }
+            else if (sevens == 1) {
+                winnings = playerBet * 5;
+            }
+            else {
+                winnings = playerBet * 1;
+            }
+
+            winMessage();
+        }
+        else
+        {
+            lossMessage();
+        }
+        
+    }
+    
+    
+    
+    
+    func winMessage() {
+        wonOrLose.isHidden = false
+        wonOrLose.text = "You won $" + String(winnings)
+        moneyLeftInBag = moneyLeftInBag + winnings
+        moneyLeft.text = "$" + String(moneyLeftInBag)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            self.wonOrLose.isHidden = true
+        }
+    }
+    
+    func showLabel() {
+        wonOrLose.isHidden = true
+    }
+    
+    func lossMessage(){
+        wonOrLose.isHidden = false
+        wonOrLose.text = "You lose $" + betValue.text!
+        moneyLeftInBag = moneyLeftInBag - Int(betValue.text!)!
+        moneyLeft.text = "$" + String(moneyLeftInBag)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            self.wonOrLose.isHidden = true
+        }
+        
+    }
+    
+    func checkJackPot() {
+        /* compare two random values */
+        var jackPotTry = Int.random(in: 1...51)
+        var jackPotWin = Int.random(in: 1...51)
+        if (jackPotTry == jackPotWin) {
+            jackpot.text = "You won $" + String(jackpotamount) + " jackpot"
+            moneyLeftInBag = moneyLeftInBag + jackpotamount
+            moneyLeft.text = "$" + String(jackpotamount)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                self.jackpot.isHidden = true
+            }
+            jackpotamount = 1000
+            jackpotAmount.text = "$" + String(jackpotamount)
+            
+            
+        }
+    }
+    
+    
     
     func Reels() -> [String] {
         var betLine = [" ", " ", " "];
@@ -206,7 +353,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
         print(betLine)
         return betLine;
     }
+    
+    
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
 
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
+    
     
     
     func assignImage1() {
@@ -409,98 +567,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             
         }
-    }
-    
-    func determineWinnings()
-    {
-        if (blanks == 0)
-        {
-            if (grapes == 3) {
-                winnings = playerBet * 10;
-            }
-            else if(bananas == 3) {
-                winnings = playerBet * 20;
-            }
-            else if (oranges == 3) {
-                winnings = playerBet * 30;
-            }
-            else if (cherries == 3) {
-                winnings = playerBet * 40;
-            }
-            else if (bars == 3) {
-                winnings = playerBet * 50;
-            }
-            else if (bells == 3) {
-                winnings = playerBet * 75;
-            }
-            else if (sevens == 3) {
-                winnings = playerBet * 100;
-            }
-            else if (grapes == 2) {
-                winnings = playerBet * 2;
-            }
-            else if (bananas == 2) {
-                winnings = playerBet * 2;
-            }
-            else if (oranges == 2) {
-                winnings = playerBet * 3;
-            }
-            else if (cherries == 2) {
-                winnings = playerBet * 4;
-            }
-            else if (bars == 2) {
-                winnings = playerBet * 5;
-            }
-            else if (bells == 2) {
-                winnings = playerBet * 10;
-            }
-            else if (sevens == 2) {
-                winnings = playerBet * 20;
-            }
-            else if (sevens == 1) {
-                winnings = playerBet * 5;
-            }
-            else {
-                winnings = playerBet * 1;
-            }
-
-            winMessage();
-        }
-        else
-        {
-            lossMessage();
-        }
-        
-    }
-    
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    func winMessage() {
-        wonOrLose.isHidden = false
-        wonOrLose.text = "You won $" + String(winnings)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            self.wonOrLose.isHidden = true
-        }
-    }
-    
-    func showLabel() {
-        wonOrLose.isHidden = true
-    }
-    
-    func lossMessage(){
-        wonOrLose.isHidden = false
-        wonOrLose.text = "You lose $" + betValue.text!
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            self.wonOrLose.isHidden = true
-        }
-        
     }
     
 
