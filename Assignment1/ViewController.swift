@@ -3,15 +3,15 @@
 //  Assignment1
 //  Team member : Harmandeep Kaur and Simranjeet Singh Dhillon
 //  Assignment : 1
-//  Version : 2
-//  Message : Images in ui shown with betline
+//  Version : 3
+//  Message : Implementation of function working as predicted
 //  Created by Simran on 2020-01-15.
 //  Copyright © 2020 centennialcollege. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBOutlet weak var view1: UIView!
@@ -56,7 +56,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var color37: UIImageView!
     @IBOutlet weak var color38: UIImageView!
     @IBOutlet weak var color39: UIImageView!
-    
+    @IBOutlet weak var betValue: UITextField!
+    @IBOutlet weak var moneyLeft: UILabel!
+    @IBOutlet weak var wonOrLose: UILabel!
+    @IBOutlet weak var jackpot: UILabel!
     var initialFrame1 = CGRect()
     var initialFrame2 = CGRect()
     var initialFrame3 = CGRect()
@@ -70,13 +73,18 @@ class ViewController: UIViewController {
     var sevens = 0;
     var blanks = 0;
     
+    var winnings : Int = -1
+    var playerBet : Int = -1
+    
     var flag1 = -1
     var flag2 = -1
     var flag3 = -1
     
     @IBAction func play(_ sender: Any) {
         
+        playerBet = Int(betValue.text!)!
         Reels()
+        
         print(flag1 , flag2, flag3)
         assignImage1()
         assignImage2()
@@ -93,7 +101,7 @@ class ViewController: UIViewController {
             self.view1.frame = frame
 
         }) { (finish) in
-
+            self.determineWinnings()
         }
 
         UIView.animate(withDuration: 3, delay: 1, options: .curveEaseIn, animations: {
@@ -128,8 +136,12 @@ class ViewController: UIViewController {
         initialFrame1 = view1.frame
         initialFrame2 = view2.frame
         initialFrame3 = view3.frame
+        
+        self.betValue.delegate = self
        
     }
+    
+   
     
     
     
@@ -399,6 +411,97 @@ class ViewController: UIViewController {
         }
     }
     
+    func determineWinnings()
+    {
+        if (blanks == 0)
+        {
+            if (grapes == 3) {
+                winnings = playerBet * 10;
+            }
+            else if(bananas == 3) {
+                winnings = playerBet * 20;
+            }
+            else if (oranges == 3) {
+                winnings = playerBet * 30;
+            }
+            else if (cherries == 3) {
+                winnings = playerBet * 40;
+            }
+            else if (bars == 3) {
+                winnings = playerBet * 50;
+            }
+            else if (bells == 3) {
+                winnings = playerBet * 75;
+            }
+            else if (sevens == 3) {
+                winnings = playerBet * 100;
+            }
+            else if (grapes == 2) {
+                winnings = playerBet * 2;
+            }
+            else if (bananas == 2) {
+                winnings = playerBet * 2;
+            }
+            else if (oranges == 2) {
+                winnings = playerBet * 3;
+            }
+            else if (cherries == 2) {
+                winnings = playerBet * 4;
+            }
+            else if (bars == 2) {
+                winnings = playerBet * 5;
+            }
+            else if (bells == 2) {
+                winnings = playerBet * 10;
+            }
+            else if (sevens == 2) {
+                winnings = playerBet * 20;
+            }
+            else if (sevens == 1) {
+                winnings = playerBet * 5;
+            }
+            else {
+                winnings = playerBet * 1;
+            }
+
+            winMessage();
+        }
+        else
+        {
+            lossMessage();
+        }
+        
+    }
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func winMessage() {
+        wonOrLose.isHidden = false
+        wonOrLose.text = "You won $" + String(winnings)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            self.wonOrLose.isHidden = true
+        }
+    }
+    
+    func showLabel() {
+        wonOrLose.isHidden = true
+    }
+    
+    func lossMessage(){
+        wonOrLose.isHidden = false
+        wonOrLose.text = "You lose $" + betValue.text!
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            self.wonOrLose.isHidden = true
+        }
+        
+    }
     
 
 
