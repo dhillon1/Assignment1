@@ -1,19 +1,22 @@
 //
 //  ViewController.swift
 //  Assignment1
-//  Team member : Harmandeep Kaur and Simranjeet Singh Dhillon
+//  Team member : Harmandeep Kaur (301092579) and Simranjeet Singh Dhillon (301093914)
 //  Assignment : 1
-//  Version : 6
-//  Message : Minor fixes in ui and reset and game quit button working without any issues in realtime
+//  Version : 8
+//  Description : Released
 //  Created by Simran on 2020-01-15.
+//  Last modified : 2020-01-23 14:00
 //  Copyright © 2020 centennialcollege. All rights reserved.
 //
 
 import UIKit
+import AVFoundation
 
+//viewController class
 class ViewController: UIViewController, UITextFieldDelegate {
     
-    
+    //connections
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var view2: UIView!
     @IBOutlet weak var view3: UIView!
@@ -61,10 +64,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var wonOrLose: UILabel!
     @IBOutlet weak var jackpot: UILabel!
     @IBOutlet weak var jackpotAmount: UILabel!
+    
+    //variables for three reel frames
     var initialFrame1 = CGRect()
     var initialFrame2 = CGRect()
     var initialFrame3 = CGRect()
     
+    //variables for icons
     var grapes = 0;
     var bananas = 0;
     var oranges = 0;
@@ -78,14 +84,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var winnings : Int = -1
     var playerBet : Int = 0
     
+        
+    //buttons for adding bet values
     @IBAction func one(_ sender: Any) {
-        var a = moneyLeftInBag - playerBet
-        if(a>=1){
-            playerBet = playerBet + 1
-            betValue.text = "$ " + String(playerBet)
-        }
+       var a = moneyLeftInBag - playerBet
+       if(a>=1){
+           playerBet = playerBet + 1
+           betValue.text = "$ " + String(playerBet)
+       }
     }
     
+    //buttons for adding bet values
     @IBAction func ten(_ sender: Any) {
         var a = moneyLeftInBag - playerBet
         if(a>=10){
@@ -94,6 +103,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    //buttons for adding bet values
     @IBAction func hundred(_ sender: Any) {
         var a = moneyLeftInBag - playerBet
         if(a>=100){
@@ -102,7 +112,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
+    //buttons for adding bet values
     @IBAction func thousand(_ sender: Any) {
         print(moneyLeftInBag)
         var a = moneyLeftInBag - playerBet
@@ -112,7 +122,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
+    //button to reset the game
     @IBAction func resetGame(_ sender: Any) {
         wonOrLose.isHidden = true
         moneyLeftInBag = 1000
@@ -130,6 +140,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         resetFruitTally()
     }
     
+    //button to quit the game
     @IBAction func quitGame(_ sender: Any) {
         wonOrLose.isHidden = true
         moneyLeftInBag = 1000
@@ -147,6 +158,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         resetFruitTally()
     }
     
+    
+    //cross button to reset the bet value
     @IBAction func cross(_ sender: Any) {
         playerBet = 0
         betValue.text = "$ " + String(playerBet)
@@ -155,18 +168,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     
-    
+    // variable for storing the betline value
+    // so that the betwine valus resembles with
+    // icons in the reel
     var flag1 = -1
     var flag2 = -1
     var flag3 = -1
     
+    // When the player clicks the spin button the game kicks off
     @IBAction func play(_ sender: Any) {
         
+        // condition if player bet in $0
         if(playerBet == 0){
+            wonOrLose.isHidden = false
+            wonOrLose.text = "Enter bet value "
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.wonOrLose.isHidden = true
+            }
             return
         }
         
-        
+        // logic happens when the animation occurs
         Reels()
         print(flag1 , flag2, flag3)
         assignImage1()
@@ -177,6 +199,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.view2.frame = self.initialFrame2
         self.view3.frame = self.initialFrame3
 
+        // animation to rotate the view on the left
         UIView.animate(withDuration: 4, delay: 0, options: .curveEaseInOut, animations: {
 
             var frame = self.view1.frame
@@ -187,6 +210,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.determineWinnings()
         }
 
+        // animation to rotate the view on the middle
         UIView.animate(withDuration: 3, delay: 1, options: .curveEaseIn, animations: {
 
             var frame = self.view2.frame
@@ -197,6 +221,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         }
 
+        // animation to rotate the view on the right
         UIView.animate(withDuration: 2, delay: 2, options: .curveEaseOut, animations: {
 
             var frame = self.view3.frame
@@ -209,6 +234,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    // reset of fruit tally after every game
     func resetFruitTally() {
         grapes = 0;
         bananas = 0;
@@ -223,7 +249,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     
-    
+    // on view load
     override func viewDidLoad() {
         super.viewDidLoad()
         assignImage1()
@@ -239,11 +265,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
    
-    
-   
-    
-    
-    
+   // Utility function to check if a value falls within a range of bounds
     func checkRange(value :  Int,lowerBounds : Int,upperBounds : Int) -> Int {
         if (value >= lowerBounds && value <= upperBounds)
         {
@@ -256,7 +278,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
 
-    
+    // This function calculates the player's winnings, if any
     func determineWinnings()
     {
         if (blanks == 0)
@@ -321,7 +343,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     
-    
+    // Utility function to show a win message and increase player money
     func winMessage() {
         wonOrLose.isHidden = false
         wonOrLose.text = "You won $" + String(winnings)
@@ -337,10 +359,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // show label
     func showLabel() {
         wonOrLose.isHidden = true
     }
     
+    // Utility function to show a loss message and reduce player money
     func lossMessage(){
         wonOrLose.isHidden = false
         wonOrLose.text = "You lose $" + String(playerBet)
@@ -356,6 +380,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    
+    // Check to see if the player won the jackpot
     func checkJackPot() {
         /* compare two random values */
         var jackPotTry = Int.random(in: 1...51)
@@ -375,7 +401,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    
+    // When this function is called it determines the betLine results
     func Reels() -> [String] {
         var betLine = [" ", " ", " "];
         var outCome = [0, 0, 0];
@@ -435,7 +461,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     
-    
+    // assign image to the left view
     func assignImage1() {
         for n in 1...13 {
             switch n {
@@ -504,6 +530,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
+    // assign image to the middle view
     func assignImage2() {
         for n in 1...13 {
             switch n {
@@ -570,6 +598,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // // assign image to the right view
     func assignImage3() {
         for n in 1...13 {
             switch n {
