@@ -3,8 +3,8 @@
 //  Assignment1
 //  Team member : Harmandeep Kaur and Simranjeet Singh Dhillon
 //  Assignment : 1
-//  Version : 4
-//  Message : Implementation of reset and quit button with minor fixes in previous version
+//  Version : 5
+//  Message : Implementation of button for spin amount
 //  Created by Simran on 2020-01-15.
 //  Copyright © 2020 centennialcollege. All rights reserved.
 //
@@ -56,8 +56,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var color37: UIImageView!
     @IBOutlet weak var color38: UIImageView!
     @IBOutlet weak var color39: UIImageView!
-    @IBOutlet weak var betValue: UITextField!
-    
+    @IBOutlet weak var betValue: UILabel!
     @IBOutlet weak var moneyLeft: UILabel!
     @IBOutlet weak var wonOrLose: UILabel!
     @IBOutlet weak var jackpot: UILabel!
@@ -65,13 +64,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var initialFrame1 = CGRect()
     var initialFrame2 = CGRect()
     var initialFrame3 = CGRect()
-    
-    @IBAction func resetGame(_ sender: Any) {
-    }
-    
-    @IBAction func quitGame(_ sender: Any) {
-    }
-    
     
     var grapes = 0;
     var bananas = 0;
@@ -84,7 +76,48 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var jackpotamount = 5000
     var moneyLeftInBag : Int = 1000
     var winnings : Int = -1
-    var playerBet : Int = -1
+    var playerBet : Int = 0
+    
+    @IBAction func one(_ sender: Any) {
+        var a = moneyLeftInBag - playerBet
+        if(a>=1){
+            playerBet = playerBet + 1
+            betValue.text = "$ " + String(playerBet)
+        }
+    }
+    
+    @IBAction func ten(_ sender: Any) {
+        var a = moneyLeftInBag - playerBet
+        if(a>=10){
+            playerBet = playerBet + 10
+            betValue.text = "$ " + String(playerBet)
+        }
+    }
+    
+    
+    
+    @IBAction func thousand(_ sender: Any) {
+        var a = moneyLeftInBag - playerBet
+        if(a>=1000){
+            playerBet = playerBet + 1000
+            betValue.text = "$ " + String(playerBet)
+        }
+    }
+    
+    
+    @IBAction func resetGame(_ sender: Any) {
+    }
+    
+    @IBAction func quitGame(_ sender: Any) {
+    }
+    
+    @IBAction func cross(_ sender: Any) {
+        playerBet = 0
+        betValue.text = "$" + String(playerBet)
+        
+    }
+    
+    
     
     
     var flag1 = -1
@@ -94,7 +127,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func play(_ sender: Any) {
         
         
-        playerBet = Int(betValue.text!)!
+        
         Reels()
         print(flag1 , flag2, flag3)
         assignImage1()
@@ -162,16 +195,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         initialFrame2 = view2.frame
         initialFrame3 = view3.frame
         
-        self.betValue.delegate = self
+        
        
     }
     
-    private func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        
-        print(betValue.text!)
-            return true
-        
-    }
+   
     
    
     
@@ -272,8 +300,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func lossMessage(){
         wonOrLose.isHidden = false
-        wonOrLose.text = "You lose $" + betValue.text!
-        moneyLeftInBag = moneyLeftInBag - Int(betValue.text!)!
+        wonOrLose.text = "You lose $" + String(playerBet)
+        moneyLeftInBag = moneyLeftInBag - playerBet
         moneyLeft.text = "$" + String(moneyLeftInBag)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
