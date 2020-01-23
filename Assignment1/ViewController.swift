@@ -3,8 +3,8 @@
 //  Assignment1
 //  Team member : Harmandeep Kaur (301092579) and Simranjeet Singh Dhillon (301093914)
 //  Assignment : 1
-//  Version : 8
-//  Description : Released
+//  Version : 9
+//  Description : Release version of application
 //  Created by Simran on 2020-01-15.
 //  Last modified : 2020-01-23 14:00
 //  Copyright © 2020 centennialcollege. All rights reserved.
@@ -222,7 +222,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
 
         // animation to rotate the view on the right
-        UIView.animate(withDuration: 2, delay: 2, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 2, delay: 2, options: .curveEaseIn, animations: {
 
             var frame = self.view3.frame
             frame.origin.y =  frame.origin.y + 840
