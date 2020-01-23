@@ -14,6 +14,7 @@
 		B19CF90F23CFDDD3005E8AD7 /* Assignment1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B19CF90D23CFDDD3005E8AD7 /* Assignment1.xcdatamodeld */; };
 		B19CF91123CFDDD4005E8AD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B19CF91023CFDDD4005E8AD7 /* Assets.xcassets */; };
 		B19CF91423CFDDD4005E8AD7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B19CF91223CFDDD4005E8AD7 /* LaunchScreen.storyboard */; };
+		B1E15F7823DA11220077FC77 /* audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1E15F7723DA11220077FC77 /* audio.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		B19CF91023CFDDD4005E8AD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B19CF91323CFDDD4005E8AD7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B19CF91523CFDDD4005E8AD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1E15F7723DA11220077FC77 /* audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = audio.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				B19CF90823CFDDD3005E8AD7 /* ViewController.swift */,
 				B19CF90A23CFDDD3005E8AD7 /* Main.storyboard */,
 				B19CF91023CFDDD4005E8AD7 /* Assets.xcassets */,
+				B1E15F7723DA11220077FC77 /* audio.mp3 */,
 				B19CF91223CFDDD4005E8AD7 /* LaunchScreen.storyboard */,
 				B19CF91523CFDDD4005E8AD7 /* Info.plist */,
 				B19CF90D23CFDDD3005E8AD7 /* Assignment1.xcdatamodeld */,
@@ -129,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B19CF91423CFDDD4005E8AD7 /* LaunchScreen.storyboard in Resources */,
+				B1E15F7823DA11220077FC77 /* audio.mp3 in Resources */,
 				B19CF91123CFDDD4005E8AD7 /* Assets.xcassets in Resources */,
 				B19CF90C23CFDDD3005E8AD7 /* Main.storyboard in Resources */,
 			);
