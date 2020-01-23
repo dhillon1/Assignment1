@@ -3,8 +3,8 @@
 //  Assignment1
 //  Team member : Harmandeep Kaur and Simranjeet Singh Dhillon
 //  Assignment : 1
-//  Version : 5
-//  Message : Implementation of button for spin amount
+//  Version : 6
+//  Message : Minor fixes in ui and reset and game quit button working without any issues in realtime
 //  Created by Simran on 2020-01-15.
 //  Copyright © 2020 centennialcollege. All rights reserved.
 //
@@ -94,9 +94,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func hundred(_ sender: Any) {
+        var a = moneyLeftInBag - playerBet
+        if(a>=100){
+            playerBet = playerBet + 100
+            betValue.text = "$ " + String(playerBet)
+        }
+    }
     
     
     @IBAction func thousand(_ sender: Any) {
+        print(moneyLeftInBag)
         var a = moneyLeftInBag - playerBet
         if(a>=1000){
             playerBet = playerBet + 1000
@@ -106,14 +114,42 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func resetGame(_ sender: Any) {
+        wonOrLose.isHidden = true
+        moneyLeftInBag = 1000
+        moneyLeft.text = "$ 1000"
+        playerBet = 0
+        jackpotamount = 5000
+        betValue.text = "$ 0"
+        jackpotAmount.text = "$ 5000"
+        winnings = -1
+        jackpot.isHidden = false
+        jackpot.text = "Game Reset... Play Again"
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            self.jackpot.isHidden = true
+        }
+        resetFruitTally()
     }
     
     @IBAction func quitGame(_ sender: Any) {
+        wonOrLose.isHidden = true
+        moneyLeftInBag = 1000
+        moneyLeft.text = "$ 1000"
+        playerBet = 0
+        jackpotamount = 5000
+        betValue.text = "$ 0"
+        jackpotAmount.text = "$ 5000"
+        jackpot.isHidden = false
+        jackpot.text = "You quitted the game..."
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            self.jackpot.isHidden = true
+        }
+        winnings = -1
+        resetFruitTally()
     }
     
     @IBAction func cross(_ sender: Any) {
         playerBet = 0
-        betValue.text = "$" + String(playerBet)
+        betValue.text = "$ " + String(playerBet)
         
     }
     
@@ -126,6 +162,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func play(_ sender: Any) {
         
+        if(playerBet == 0){
+            return
+        }
         
         
         Reels()
@@ -165,7 +204,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.view3.frame = frame
 
         }) { (finish) in
-
+            
         }
         
     }
@@ -288,6 +327,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         wonOrLose.text = "You won $" + String(winnings)
         moneyLeftInBag = moneyLeftInBag + winnings
         moneyLeft.text = "$" + String(moneyLeftInBag)
+        checkJackPot()
+        self.betValue.text = "$ 0"
+        self.playerBet = 0
+        resetFruitTally()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             self.wonOrLose.isHidden = true
@@ -303,6 +346,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         wonOrLose.text = "You lose $" + String(playerBet)
         moneyLeftInBag = moneyLeftInBag - playerBet
         moneyLeft.text = "$" + String(moneyLeftInBag)
+        self.betValue.text = "$ 0"
+        self.playerBet = 0
+        resetFruitTally()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             self.wonOrLose.isHidden = true
@@ -317,7 +363,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if (jackPotTry == jackPotWin) {
             jackpot.text = "You won $" + String(jackpotamount) + " jackpot"
             moneyLeftInBag = moneyLeftInBag + jackpotamount
-            moneyLeft.text = "$" + String(jackpotamount)
+            moneyLeft.text = "$" + String(moneyLeftInBag)
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 self.jackpot.isHidden = true
             }
@@ -385,11 +431,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-
-        textField.resignFirstResponder()
-        return true
-    }
     
     
     
